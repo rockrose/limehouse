@@ -1,0 +1,18 @@
+﻿@model LimehouseStudiosTechChallenge.Models.UserPostsViewModel
+
+<h3>@Model.User.Name (@Model.User.Username)</h3>
+
+<table id="postsTable" class="table">
+	<thead>
+		<th>Title</th>
+	</thead>
+	<tbody>
+	@foreach (var post in Model.User.Posts)
+	{
+		<tr>
+			<td>@post.Title</td>
+		</tr>
+	}
+	</tbody>
+</table>
+

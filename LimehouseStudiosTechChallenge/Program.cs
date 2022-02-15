@@ -1,6 +1,10 @@
+using LimehouseStudios.Repositories;
+using LimehouseStudios.Services;
 using LimehouseStudiosTechChallenge.Data;
+using LimehouseStudiosTechChallenge.Filters;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +17,17 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
+
+var logger = new LoggerConfiguration().ReadFrom.Configuration(builder.Configuration).CreateLogger();
+builder.Logging.ClearProviders();
+builder.Logging.AddSerilog(logger);
+
+builder.Services.AddScoped<HandleException>();
+builder.Services.AddScoped<IUserService, UserService>();
+
+builder.Services.AddHttpClient<IUserRepository, UserRepository>(c => {
+    c.BaseAddress = new Uri(builder.Configuration.GetSection("Services").GetSection("UserPostDataService")["UserPostDataBaseUri"]);
+});
 
 var app = builder.Build();
 
@@ -33,8 +48,11 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
-app.UseAuthentication();
-app.UseAuthorization();
+if (!app.Environment.IsDevelopment())
+{
+    app.UseAuthentication();
+    app.UseAuthorization();
+}
 
 app.MapControllerRoute(
     name: "default",

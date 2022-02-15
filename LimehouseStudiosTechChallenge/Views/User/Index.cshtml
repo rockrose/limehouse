@@ -1,0 +1,81 @@
+﻿@model LimehouseStudiosTechChallenge.Models.UsersViewModel
+@{
+    ViewData["Title"] = "Users";
+}
+
+@section Scripts
+{
+	<script>
+		$(function() {
+			$("#usersTable td a").click(function(e) {
+				var userId = $(this).data("id");
+				loadPosts(userId);
+			});
+		});
+
+		function loadPosts(userId) {
+			$("#posts").empty();
+			$("#postsLoading").show();
+			var detailsUrl = '@Url.Action("Details", "User")' + '/' + userId;
+			var postsDiv = $("#posts");
+			$.ajax({
+				url: detailsUrl,
+				type: 'GET',
+				cache: false,
+				context: postsDiv,
+				success: function(result) {
+					$("#postsLoading").hide();
+					this.html(result);
+				}
+			});
+			$("#postsPanel").modal('show');
+		}
+	</script>
+}
+
+<table id="usersTable" class="table">
+	<thead>
+		<th>Username</th>
+		<th>Name</th>
+		<th>Number of posts</th>
+	</thead>
+	<tbody>
+	@foreach (var user in Model.Users)
+	{
+		<tr>
+			<td>@user.Username</td>
+			<td>@user.Name</td>
+			<td class="text-end">
+			@if (user.PostCount > 0)
+			{
+				<a href="javascript:void(0);" data-id="@user.Id">@user.PostCount</a>
+			}
+			else
+			{
+				@user.PostCount
+			}
+			</td>
+		</tr>
+	}
+	</tbody>
+</table>
+
+<div class="modal" id="postsPanel">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h2 class="modal-title">Posts</h2>
+        <button type="button" class="close" onclick="javascript:$('#postsPanel').modal('hide');">&times;</button>
+      </div>
+
+	  <div id="postsLoading" class="modal-body">Loading...</div>
+      <div id="posts" class="modal-body"></div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" onclick="javascript:$('#postsPanel').modal('hide');">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>

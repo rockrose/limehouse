@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LimehouseStudios.Tests", "L
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LimehouseStudios.Models", "LimehouseStudios.Models\LimehouseStudios.Models.csproj", "{52962608-CE1C-4EC7-ABF2-057DE29E58B8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LimehouseStudios.Repositories", "LimehouseStudios.Repositories\LimehouseStudios.Repositories.csproj", "{57C78004-66AF-4C27-A45E-E7541EC7F9C1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{52962608-CE1C-4EC7-ABF2-057DE29E58B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{52962608-CE1C-4EC7-ABF2-057DE29E58B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{52962608-CE1C-4EC7-ABF2-057DE29E58B8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{57C78004-66AF-4C27-A45E-E7541EC7F9C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{57C78004-66AF-4C27-A45E-E7541EC7F9C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{57C78004-66AF-4C27-A45E-E7541EC7F9C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{57C78004-66AF-4C27-A45E-E7541EC7F9C1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

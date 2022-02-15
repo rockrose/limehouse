@@ -15,7 +15,7 @@ namespace LimehouseStudiosTechChallenge.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            return Redirect(Url.Action("Index", "User"));
         }
 
         public IActionResult Privacy()
