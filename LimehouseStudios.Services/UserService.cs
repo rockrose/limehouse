@@ -5,8 +5,7 @@ namespace LimehouseStudios.Services
 {
     public interface IUserService
     {
-        Task<IEnumerable<User>> RetrieveUsers();
-        Task<User> RetrieveUser(int userId);
+        IAsyncEnumerable<User> RetrieveUsersWithPosts();
     }
 
     public class UserService : IUserService
@@ -18,14 +17,27 @@ namespace LimehouseStudios.Services
             _userRepository = userRepository;
         }
 
-        public async Task<IEnumerable<User>> RetrieveUsers()
+        private async IAsyncEnumerable<User> RetrieveUsers()
         {
-            return await _userRepository.GetUsers();
+            await foreach (var user in _userRepository.GetUsers())
+            {
+                yield return user;
+            }
         }
 
-        public async Task<User> RetrieveUser(int userId)
+        private async Task<IEnumerable<Post>> RetrieveUserPosts(int userId)
         {
-            return await _userRepository.GetUser(userId);
+            return await _userRepository.GetUserPosts(userId);
+        }
+
+        public async IAsyncEnumerable<User> RetrieveUsersWithPosts()
+        {
+            await foreach (var user in RetrieveUsers())
+            {
+                var posts = await RetrieveUserPosts(user.Id);
+                user.Posts = posts;
+                yield return user;
+            }
         }
     }
 }

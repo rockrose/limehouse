@@ -3,15 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.32112.339
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LimehouseStudiosTechChallenge", "LimehouseStudiosTechChallenge\LimehouseStudiosTechChallenge.csproj", "{3B9AA9F2-A55A-4D95-8A52-28B0A5BD378D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LimehouseStudiosTechChallenge", "LimehouseStudiosTechChallenge\LimehouseStudiosTechChallenge.csproj", "{3B9AA9F2-A55A-4D95-8A52-28B0A5BD378D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LimehouseStudios.Services", "LimehouseStudios.Services\LimehouseStudios.Services.csproj", "{766DCE25-C3B5-44B3-AECD-44D9093D5FDF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LimehouseStudios.Services", "LimehouseStudios.Services\LimehouseStudios.Services.csproj", "{766DCE25-C3B5-44B3-AECD-44D9093D5FDF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LimehouseStudios.Tests", "LimehouseStudios.Tests\LimehouseStudios.Tests.csproj", "{25A9397B-CE74-4A87-8447-D3F90464610F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LimehouseStudios.Tests", "LimehouseStudios.Tests\LimehouseStudios.Tests.csproj", "{25A9397B-CE74-4A87-8447-D3F90464610F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LimehouseStudios.Models", "LimehouseStudios.Models\LimehouseStudios.Models.csproj", "{52962608-CE1C-4EC7-ABF2-057DE29E58B8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LimehouseStudios.Models", "LimehouseStudios.Models\LimehouseStudios.Models.csproj", "{52962608-CE1C-4EC7-ABF2-057DE29E58B8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LimehouseStudios.Repositories", "LimehouseStudios.Repositories\LimehouseStudios.Repositories.csproj", "{57C78004-66AF-4C27-A45E-E7541EC7F9C1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LimehouseStudios.Repositories", "LimehouseStudios.Repositories\LimehouseStudios.Repositories.csproj", "{57C78004-66AF-4C27-A45E-E7541EC7F9C1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

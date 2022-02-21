@@ -5,12 +5,14 @@
 <table id="postsTable" class="table">
 	<thead>
 		<th>Title</th>
+		<th>Body</th>
 	</thead>
 	<tbody>
 	@foreach (var post in Model.User.Posts)
 	{
 		<tr>
 			<td>@post.Title</td>
+			<td>@post.Body</td>
 		</tr>
 	}
 	</tbody>

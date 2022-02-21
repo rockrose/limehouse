@@ -1,12 +1,11 @@
 ﻿using LimehouseStudios.Models;
-using System.Net.Http.Formatting;
 
 namespace LimehouseStudios.Repositories
 {
     public interface IUserRepository
     {
-        Task<IEnumerable<User>> GetUsers();
-        Task<User> GetUser(int userId);
+        IAsyncEnumerable<User> GetUsers();
+        Task<IEnumerable<Post>> GetUserPosts(int userId);
     }
 
     public class UserRepository : IUserRepository
@@ -18,19 +17,21 @@ namespace LimehouseStudios.Repositories
             _httpClient = httpClient;
         }
 
-        public async Task<IEnumerable<User>> GetUsers()
+        public async IAsyncEnumerable<User> GetUsers()
         {
             var response = await _httpClient.GetAsync("users");
             var users = await response.Content.ReadAsAsync<IEnumerable<User>>();
-            users.ToList().ForEach(u => u.Posts.ToList().ForEach(p => p.UserId = u.Id));
-            return users;
+            foreach (var user in users)
+            {
+                yield return user;
+            }
         }
 
-        public async Task<User> GetUser(int userId)
+        public async Task<IEnumerable<Post>> GetUserPosts(int userId)
         {
-            var response = await _httpClient.GetAsync($"users/{userId}");
-            var user = await response.Content.ReadAsAsync<User>();
-            return user;
+            var response = await _httpClient.GetAsync($"users/{userId}/posts");
+            var posts = await response.Content.ReadAsAsync<IEnumerable<Post>>();
+            return posts;
         }
     }
 }

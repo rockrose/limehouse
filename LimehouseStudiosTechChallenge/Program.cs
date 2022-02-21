@@ -1,5 +1,6 @@
 using LimehouseStudios.Repositories;
 using LimehouseStudios.Services;
+using LimehouseStudios.Services.Caching;
 using LimehouseStudiosTechChallenge.Data;
 using LimehouseStudiosTechChallenge.Filters;
 using Microsoft.AspNetCore.Identity;
@@ -24,6 +25,7 @@ builder.Logging.AddSerilog(logger);
 
 builder.Services.AddScoped<HandleException>();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddMemoryCache();
 
 builder.Services.AddHttpClient<IUserRepository, UserRepository>(c => {
     c.BaseAddress = new Uri(builder.Configuration.GetSection("Services").GetSection("UserPostDataService")["UserPostDataBaseUri"]);

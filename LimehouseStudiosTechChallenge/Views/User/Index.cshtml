@@ -35,16 +35,22 @@
 
 <table id="usersTable" class="table">
 	<thead>
-		<th>Username</th>
 		<th>Name</th>
+		<th>Username</th>
+		<th>Email</th>
+		<th>Phone</th>
+		<th>Website</th>
 		<th>Number of posts</th>
 	</thead>
 	<tbody>
 	@foreach (var user in Model.Users)
 	{
 		<tr>
-			<td>@user.Username</td>
 			<td>@user.Name</td>
+			<td>@user.Username</td>
+			<td>@user.Email</td>
+			<td>@user.Phone</td>
+			<td>@user.Website</td>
 			<td class="text-end">
 			@if (user.PostCount > 0)
 			{

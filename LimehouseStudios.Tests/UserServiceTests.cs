@@ -1,18 +1,17 @@
+using System;
+using System.Linq;
+using System.Net.Http;
 using LimehouseStudios.Repositories;
 using LimehouseStudios.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Configuration;
-using System.Linq;
-using System.Net.Http;
 
 namespace LimehouseStudios.Tests
 {
     [TestClass]
     public class UserServiceTests
     {
-        private HttpClient _httpClient;
+        private HttpClient? _httpClient;
 
         [TestInitialize]
         public void Initialise()
@@ -26,24 +25,26 @@ namespace LimehouseStudios.Tests
         public void RetrieveUsers()
         {
             IUserService userService = new UserService(new UserRepository(_httpClient));
-            var users = userService.RetrieveUsers().Result;
+            var users = userService.RetrieveUsersWithPosts().ToListAsync().Result;
             Assert.IsTrue(users.Count() > 0, "Expected users but none were returned.");
         }
 
         [TestMethod]
-        public void RetrieveKnownValidUser()
+        public void RetrievePostsForKnownUser()
         {
             IUserService userService = new UserService(new UserRepository(_httpClient));
-            var user = userService.RetrieveUser(1).Result;
-            Assert.IsTrue(user != null && user.Id > 0 && user.Username != null, "Expected a known user but the user wasn't found.");
+            var users = userService.RetrieveUsersWithPosts().ToListAsync().Result;
+            var user = users.FirstOrDefault(u => u.Id == 1);
+            Assert.IsTrue(user != null && user.PostCount > 0, "Expected posts for a known user but no posts were found.");
         }
 
         [TestMethod]
-        public void RetrieveKnownInvalidUser()
+        public void RetrievePostsForUnknownUser()
         {
             IUserService userService = new UserService(new UserRepository(_httpClient));
-            var user = userService.RetrieveUser(99).Result;
-            Assert.IsTrue(user == null || (user.Id == 0 && user.Username == null), "A known invalid user not expected to have been returned but a user was found.");
+            var users = userService.RetrieveUsersWithPosts().ToListAsync().Result;
+            var user = users.FirstOrDefault(u => u.Id == 99);
+            Assert.IsTrue(user == null, "Posts for a unknown user not expected to have been returned but a posts for this user was found.");
         }
 
         [TestCleanup]
